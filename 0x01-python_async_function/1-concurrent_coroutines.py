@@ -5,7 +5,7 @@ import asyncio
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n, max_delay) -> list[float]:
+async def wait_n(n, max_delay) -> list]:
     """
         A function that takes two params, n and max_delay and spawns
         wait_random n times with the specified max_delay by passing
@@ -21,7 +21,7 @@ async def wait_n(n, max_delay) -> list[float]:
 
     for task in tasks:
         delay = await task
-        if not delays or delays[-1]:
+        if not delays or delay >= delays[-1]:
             delays.append(delay)
         else:
             for i in range(len(delays)):
