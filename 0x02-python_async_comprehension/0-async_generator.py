@@ -2,9 +2,10 @@
 """Async Generator"""
 import asyncio
 import random
+from typing import List
 
 
-async def async_generator() -> list[float]:
+async def async_generator() -> List[float]:
     """
     An async func that takes no arguments, executes a loop 10 times, each
     time asynchronously waits 1 second, then yields a random number between
