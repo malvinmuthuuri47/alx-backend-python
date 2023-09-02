@@ -8,7 +8,7 @@ from parameterized import parameterized
 from client import GithubOrgClient
 
 
-class TestGitHubOrgClient(unittest.TestCase):
+class TestGithubOrgClient(unittest.TestCase):
     """Class that implements tests to test the GithubOrgClient module"""
     @parameterized.expand([
         ("google",),
