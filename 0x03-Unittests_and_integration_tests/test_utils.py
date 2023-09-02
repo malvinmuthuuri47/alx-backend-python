@@ -20,11 +20,7 @@ class TestAccessNestedMap(unittest.TestCase):
             ({"a": {"b": 2}}, ("a", "b"), 2),
         ])
     def test_access_nested_map(self, nested_map, path, expected_value):
-        """
-        This function tests the access_nested_map by passing in some
-        parameters and comparing them to the expected values using the
-        assertEqual method
-        """
+        """Tests that the function returns the expected value"""
         self.assertEqual(access_nested_map(nested_map, path), expected_value)
 
     @parameterized.expand([
@@ -75,6 +71,8 @@ class TestGetJson(unittest.TestCase):
 
             # Assert that results match expected payload
             self.assertEqual(result, test_payload)
+
+
 class TestMemoize(unittest.TestCase):
     """This class encapsulates tests for the utils.memoize function"""
     def test_memoize(self):
