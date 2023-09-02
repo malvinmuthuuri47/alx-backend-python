@@ -22,3 +22,17 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map(self, nested_map, path, expected_value):
         """Tests that the function returns the expected value"""
         self.assertEqual(access_nested_map(nested_map, path), expected_value)
+
+    @parameterized.expand([
+        ({}, ("a",), KeyError),
+        ({"a": 1}, ("a", "b"), KeyError),
+    ])
+    def test_access_nested_map_exception(self, nested_map, path, expected_val):
+        """
+        This function tests the exception type returned by the
+        access_nested_map() and raises fails to pass the test if
+        the exception is of an incorrect type
+        """
+        with self.assertRaises(expected_val) as context:
+            access_nested_map(nested_map, path)
+        self.assertEqual(type(context.exception), expected_val)
