@@ -71,3 +71,36 @@ class TestGetJson(unittest.TestCase):
 
             # Assert that results match expected payload
             self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """This class encapsulates tests for the utils.memoize function"""
+    def test_memoize(self):
+        """
+        This function tests the return value of the a_method
+        and also the number of times it has been called
+        """
+        class TestClass:
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        test_instance = TestClass()
+
+        # Patch a_method to track calls
+        with patch.object(test_instance, 'a_method') as mock_a_method:
+            mock_a_method.return_value = 42
+
+            # Call a_property twice
+            result1 = test_instance.a_property
+            result2 = test_instance.a_property
+
+            # Assert that a_method was called only once
+            mock_a_method.assert_called_once()
+
+            # Assert that results are correct
+            self.assertEqual(result1, 42)
+            self.assertEqual(result2, 42)
