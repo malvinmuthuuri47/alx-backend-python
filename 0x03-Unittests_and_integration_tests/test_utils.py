@@ -27,7 +27,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), KeyError),
         ({"a": 1}, ("a", "b"), KeyError),
     ])
-    def test_access_nested_map_exception(self, nested_map, path, expected_val):
+    def test_access_nested_map_exception(self, nested_map: Mapping, path: Tuple[str], expected_val: Type[Exception]) -> None:
         """
         This function tests the exception type returned by the
         access_nested_map() and raises fails to pass the test if
