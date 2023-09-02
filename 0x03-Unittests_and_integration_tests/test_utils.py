@@ -36,3 +36,38 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(expected_val) as context:
             access_nested_map(nested_map, path)
         self.assertEqual(type(context.exception), expected_val)
+
+
+class TestGetJson(unittest.TestCase):
+    """This class encapsulates all test methods for the utils.get_json()"""
+    @parameterized.expand([
+        # Define test data
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    def test_get_json(self, test_url, test_payload):
+        """
+        This method simulates a call to an external API and tests
+        that the return values are the same as the parameters defined
+        in the test_data below.
+
+        The url is the first value in the test_url_payload_pairs list
+        and the expected response is the dictionary in the list
+
+        You use the python mock object to simulate the request to the
+        external API
+        """
+
+        with patch('utils.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.json.return_value = test_payload
+            mock_get.return_value = mock_response
+
+            # Call function under test
+            result = get_json(test_url)
+
+            # Assert the no. of times the mock was called
+            mock_get.assert_called_once_with(test_url)
+
+            # Assert that results match expected payload
+            self.assertEqual(result, test_payload)
